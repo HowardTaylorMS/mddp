@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Get WWImporters Data direct"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cbf57c35-4596-ae92-4ee4-60caf75564dc"
+  }
+}
