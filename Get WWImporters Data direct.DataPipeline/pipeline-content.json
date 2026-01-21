@@ -1,5 +1,67 @@
 {
   "properties": {
-    "activities": []
+    "parameters": {
+      "sourceFolder": {
+        "type": "String",
+        "defaultValue": "Files/incremental/WWImporters"
+      },
+      "sourceFileName": {
+        "type": "String",
+        "defaultValue": "WWImporters.parquet"
+      },
+      "sinkFolder": {
+        "type": "String",
+        "defaultValue": "Tables/WWImporters"
+      },
+      "sinkFileName": {
+        "type": "String",
+        "defaultValue": "WWImporters.parquet"
+      }
+    },
+    "activities": [
+      {
+        "name": "Copy WWImporters Incremental",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "7.00:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "userProperties": [],
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource"
+          },
+          "sink": {
+            "type": "ParquetSink",
+            "copyBehavior": "PreserveHierarchy"
+          },
+          "enableStaging": false
+        },
+        "inputs": [
+          {
+            "referenceName": "DS_WWImporters_Parquet",
+            "type": "DatasetReference",
+            "parameters": {
+              "folderPath": "@pipeline().parameters.sourceFolder",
+              "fileName": "@pipeline().parameters.sourceFileName"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "DS_WWImporters_Incremental",
+            "type": "DatasetReference",
+            "parameters": {
+              "folderPath": "@pipeline().parameters.sinkFolder",
+              "fileName": "@pipeline().parameters.sinkFileName"
+            }
+          }
+        ]
+      }
+    ]
   }
 }
